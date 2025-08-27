@@ -11,7 +11,7 @@ external_ports = {
 enable_monitoring = false
 backup_enabled = false
 
-# Configuración específica de LocalStack
+# Configuracion especifica de localStack
 aws_region = "us-east-1"
 localstack_endpoint = "http://localhost:4566"
 s3_bucket_suffix = "dev"
