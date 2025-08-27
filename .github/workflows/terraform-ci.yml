@@ -61,7 +61,7 @@ jobs:
       run: |
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         unzip awscliv2.zip
-        sudo ./aws/install
+        sudo ./aws/install --update
         
     # Paso 4: Configurar LocalStack
     - name: Configurar LocalStack
@@ -130,7 +130,7 @@ jobs:
       run: |
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         unzip awscliv2.zip
-        sudo ./aws/install
+        sudo ./aws/install --update
         
     - name: Configurar LocalStack
       run: |
@@ -216,7 +216,7 @@ jobs:
       run: |
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         unzip awscliv2.zip
-        sudo ./aws/install
+        sudo ./aws/install --update
         
     - name: Configurar LocalStack
       run: |
