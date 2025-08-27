@@ -19,7 +19,7 @@ resource "docker_container" "postgres" {
   networks_advanced {
     name = var.network_id
   }
-  
+
   # Variables de entorno para configurar PostgreSQL
   env = [
     "POSTGRES_DB=votes",

@@ -14,9 +14,9 @@ resource "docker_image" "worker" {
 resource "docker_container" "worker" {
   name  = var.container_name
   image = docker_image.worker.image_id
-  
+
   networks_advanced {
-    name    = var.network_id
+    name = var.network_id
   }
 
   env = [
@@ -32,10 +32,10 @@ resource "docker_container" "worker" {
 
   # Healthcheck para verificar que la app Flask responde
   healthcheck {
-    test     = ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
-    interval = "10s"
-    timeout  = "5s"
-    retries  = 5
+    test         = ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
+    interval     = "10s"
+    timeout      = "5s"
+    retries      = 5
     start_period = "40s"
   }
 

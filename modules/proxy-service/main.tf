@@ -20,9 +20,9 @@ resource "docker_container" "nginx" {
   }
 
   networks_advanced {
-    name    = var.network_id
-    }
-volumes {
+    name = var.network_id
+  }
+  volumes {
     # 2. Bind mount para el script de inicialización
     host_path      = var.init_script_path
     container_path = "/etc/nginx/conf.d/vote.conf"
@@ -34,7 +34,7 @@ volumes {
     "-c",
     "rm -f /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
   ]
-  
+
   # Healthcheck para verificar que nginx responde
   healthcheck {
     test     = ["CMD", "wget", "-qO-", "http://localhost/health"]
@@ -42,5 +42,5 @@ volumes {
     timeout  = "3s"
     retries  = 3
   }
-  
+
 }

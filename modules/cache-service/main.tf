@@ -12,19 +12,19 @@ resource "docker_image" "redis" {
 }
 
 resource "docker_container" "redis" {
-  name    = var.container_name
-  image   = docker_image.redis.image_id
+  name  = var.container_name
+  image = docker_image.redis.image_id
   networks_advanced {
     name = var.network_id
   }
 
   healthcheck {
-      test = ["CMD", "redis-cli", "ping"]
-      interval = "5s"
-      timeout = "3s"
-      retries = 5
-    }
+    test     = ["CMD", "redis-cli", "ping"]
+    interval = "5s"
+    timeout  = "3s"
+    retries  = 5
+  }
   restart = "always"
 
-  
+
 }

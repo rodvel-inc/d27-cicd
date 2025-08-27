@@ -19,9 +19,9 @@ resource "docker_container" "results" {
     internal = 3010
     external = 3010
   }
-  
+
   networks_advanced {
-    name    = var.network_id
+    name = var.network_id
   }
 
   env = [
@@ -35,10 +35,10 @@ resource "docker_container" "results" {
 
   # Healthcheck para verificar que la app Flask responde
   healthcheck {
-    test     = ["CMD", "curl", "-f", "http://localhost:3010/healthz"]
-    interval = "10s"
-    timeout  = "5s"
-    retries  = 5
+    test         = ["CMD", "curl", "-f", "http://localhost:3010/healthz"]
+    interval     = "10s"
+    timeout      = "5s"
+    retries      = 5
     start_period = "40s"
   }
 

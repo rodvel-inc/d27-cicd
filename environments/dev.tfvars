@@ -1,7 +1,7 @@
 # Desarrollo - Recursos mínimos con LocalStack
-app_name = "roxs-voting-dev"
+app_name      = "roxs-voting-dev"
 replica_count = 1
-memory_limit = 256
+memory_limit  = 256
 
 external_ports = {
   vote   = 8080
@@ -9,9 +9,9 @@ external_ports = {
 }
 
 enable_monitoring = false
-backup_enabled = false
+backup_enabled    = false
 
 # Configuracion especifica de localStack
-aws_region = "us-east-1"
+aws_region          = "us-east-1"
 localstack_endpoint = "http://localhost:4566"
-s3_bucket_suffix = "dev"
+s3_bucket_suffix    = "dev"
