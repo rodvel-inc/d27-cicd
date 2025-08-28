@@ -1,5 +1,5 @@
 external_ports = {
-  nginx   = 8080
+  nginx  = 8080
   result = 3010
 }
 
