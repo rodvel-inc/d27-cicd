@@ -154,6 +154,7 @@ jobs:
     - name: Generar plan
       run: |
         terraform plan \
+          -input=false \
           -var-file="environments/${{ matrix.environment }}.tfvars" \
           -out="${{ matrix.environment }}.tfplan"
       env:
