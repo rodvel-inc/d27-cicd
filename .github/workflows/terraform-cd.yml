@@ -118,17 +118,18 @@ jobs:
         terraform apply \
           -var-file="environments/dev.tfvars" \
           -auto-approve
-    - name: Verificar despliegue en LocalStack
+    - name: 📄 [Verificación] Mostrar Outputs de Terraform
+      run: terraform output
+
+    - name: 📦 [Verificación] Listar Contenido del Bucket S3 (con Debug)
       run: |
-        echo "🎉 Despliegue a desarrollo completado!"
-        echo "📊 Obteniendo información del despliegue..."
-        terraform output
-        
-        echo "📦 Verificando recursos en LocalStack S3..."
-        aws --endpoint-url=http://localhost:4566 s3 ls s3://terraform-state-roxs/workspaces/dev/
-        
-        echo "🔍 Estado actual de Terraform..."
-        aws --endpoint-url=http://localhost:4566 s3 cp s3://terraform-state-roxs/workspaces/dev/terraform.tfstate - | head -20
+        echo "Intentando listar el contenido del bucket con depuración..."
+        aws --endpoint-url=http://localhost:4566 s3 ls s3://terraform-state-roxs/workspaces/dev/ --debug
+
+    - name: 🔍 [Verificación] Mostrar Estado de Terraform en S3 (con Debug)
+      run: |
+        echo "Intentando leer el archivo de estado con depuración..."
+        aws --endpoint-url=http://localhost:4566 s3 cp s3://terraform-state-roxs/workspaces/dev/terraform.tfstate - --debug | head -20
 
   # Despliegue a Staging (con aprobación)
   deploy-staging:
@@ -208,16 +209,18 @@ jobs:
         terraform apply \
           -var-file="environments/staging.tfvars" \
           -auto-approve
-    - name: Verificar aplicación en staging
+    - name: 📄 [Verificación] Mostrar Outputs de Terraform
+      run: terraform output
+
+    - name: 📦 [Verificación] Listar Contenido del Bucket S3 (con Debug)
       run: |
-        echo "⏳ Esperando a que los servicios estén listos..."
-        sleep 30
-        
-        echo "🧪 Verificando que la aplicación responda..."
-        curl -f http://localhost:8081 || echo "⚠️ Aplicación no responde aún"
-        
-        echo "📦 Estado en LocalStack S3..."
-        aws --endpoint-url=http://localhost:4566 s3 ls s3://terraform-state-roxs/workspaces/staging/
+        echo "Intentando listar el contenido del bucket con depuración..."
+        aws --endpoint-url=http://localhost:4566 s3 ls s3://terraform-state-roxs/workspaces/dev/ --debug
+
+    - name: 🔍 [Verificación] Mostrar Estado de Terraform en S3 (con Debug)
+      run: |
+        echo "Intentando leer el archivo de estado con depuración..."
+        aws --endpoint-url=http://localhost:4566 s3 cp s3://terraform-state-roxs/workspaces/dev/terraform.tfstate - --debug | head -20
 
   # Despliegue a Producción (solo manual)
   deploy-prod:
