@@ -12,7 +12,7 @@ terraform {
 
 # Configuración del proveedor Docker con autenticación
 provider "docker" {
-  registry_auth {
+  auth_config {
     address  = "https://index.docker.io/v1/"
     username = var.docker_username
     password = var.docker_token
