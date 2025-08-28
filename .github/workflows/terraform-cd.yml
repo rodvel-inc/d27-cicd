@@ -52,6 +52,9 @@ jobs:
       TF_VAR_database_password: ${{ secrets.DEV_DB_PASSWORD || 'dev-default-password' }}
       TF_VAR_docker_username: ${{ vars.DOCKERHUB_USERNAME }}
       TF_VAR_docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
     
     services:
       localstack:
