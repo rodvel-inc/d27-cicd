@@ -11,9 +11,12 @@ external_ports = {
 enable_monitoring = true
 backup_enabled    = true
 
+database_volume_name = "db-data-staging"
+
+/*
 # Configuración específica de LocalStack
 aws_region          = "us-east-1"
 localstack_endpoint = "http://localhost:4566"
 s3_bucket_suffix    = "staging"
+*/
 
-database_volume_name = "db-data-staging"
