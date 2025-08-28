@@ -93,10 +93,7 @@ jobs:
         
     - name: Terraform Init con S3 Backend
       run: |
-        terraform init \
-          -backend-config="endpoint=http://localhost:4566" \
-          -backend-config="access_key=test" \
-          -backend-config="secret_key=test"
+        terraform init 
       env:
         AWS_ENDPOINT_URL: http://localhost:4566
       
@@ -184,10 +181,7 @@ jobs:
         
     - name: Terraform Init con S3 Backend
       run: |
-        terraform init \
-          -backend-config="endpoint=http://localhost:4566" \
-          -backend-config="access_key=test" \
-          -backend-config="secret_key=test"
+        terraform init
       env:
         AWS_ENDPOINT_URL: http://localhost:4566
       
@@ -270,10 +264,7 @@ jobs:
         
     - name: Terraform Init con S3 Backend
       run: |
-        terraform init \
-          -backend-config="endpoint=http://localhost:4566" \
-          -backend-config="access_key=test" \
-          -backend-config="secret_key=test"
+        terraform init
       env:
         AWS_ENDPOINT_URL: http://localhost:4566
       
