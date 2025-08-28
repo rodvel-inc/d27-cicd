@@ -215,12 +215,12 @@ jobs:
     - name: 📦 [Verificación] Listar Contenido del Bucket S3 (con Debug)
       run: |
         echo "Intentando listar el contenido del bucket con depuración..."
-        aws --endpoint-url=http://localhost:4566 s3 ls s3://terraform-state-roxs/workspaces/dev/ --debug
+        aws --endpoint-url=http://localhost:4566 s3 ls s3://terraform-state-roxs/workspaces/staging/ --debug
 
     - name: 🔍 [Verificación] Mostrar Estado de Terraform en S3 (con Debug)
       run: |
         echo "Intentando leer el archivo de estado con depuración..."
-        aws --endpoint-url=http://localhost:4566 s3 cp s3://terraform-state-roxs/workspaces/dev/terraform.tfstate - --debug | head -20
+        aws --endpoint-url=http://localhost:4566 s3 cp s3://terraform-state-roxs/workspaces/staging/terraform.tfstate - --debug | head -20
 
   # Despliegue a Producción (solo manual)
   deploy-prod:
