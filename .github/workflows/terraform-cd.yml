@@ -47,6 +47,12 @@ jobs:
       name: development
       url: http://localhost:8080
     
+    env:
+      AWS_ENDPOINT_URL: http://localhost:4566
+      TF_VAR_database_password: ${{ secrets.DEV_DB_PASSWORD || 'dev-default-password' }}
+      TF_VAR_docker_username: ${{ vars.DOCKERHUB_USERNAME }}
+      TF_VAR_docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
+    
     services:
       localstack:
         image: localstack/localstack:3.0
@@ -109,12 +115,6 @@ jobs:
         terraform apply \
           -var-file="environments/dev.tfvars" \
           -auto-approve
-      env:
-        AWS_ENDPOINT_URL: http://localhost:4566
-        TF_VAR_database_password: ${{ secrets.DEV_DB_PASSWORD || 'dev-default-password' }}
-        TF_VAR_docker_username: ${{ vars.DOCKERHUB_USERNAME }}
-        TF_VAR_docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
-      
     - name: Verificar despliegue en LocalStack
       run: |
         echo "🎉 Despliegue a desarrollo completado!"
@@ -136,6 +136,12 @@ jobs:
     environment: 
       name: staging
       url: http://localhost:8081
+    
+    env:
+        AWS_ENDPOINT_URL: http://localhost:4566
+        TF_VAR_database_password: ${{ secrets.STAGING_DB_PASSWORD || 'staging-default-password' }}
+        TF_VAR_docker_username: ${{ vars.DOCKERHUB_USERNAME }}
+        TF_VAR_docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
     
     services:
       localstack:
@@ -199,12 +205,6 @@ jobs:
         terraform apply \
           -var-file="environments/staging.tfvars" \
           -auto-approve
-      env:
-        AWS_ENDPOINT_URL: http://localhost:4566
-        TF_VAR_database_password: ${{ secrets.STAGING_DB_PASSWORD || 'staging-default-password' }}
-        TF_VAR_docker_username: ${{ vars.DOCKERHUB_USERNAME }}
-        TF_VAR_docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
-      
     - name: Verificar aplicación en staging
       run: |
         echo "⏳ Esperando a que los servicios estén listos..."
@@ -224,6 +224,12 @@ jobs:
     environment: 
       name: production
       url: http://production.roxs-voting.com
+    
+    env:
+        AWS_ENDPOINT_URL: http://localhost:4566
+        TF_VAR_database_password: ${{ secrets.PROD_DB_PASSWORD || 'prod-default-password' }}
+        TF_VAR_docker_username: ${{ vars.DOCKERHUB_USERNAME }}
+        TF_VAR_docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
     
     services:
       localstack:
@@ -284,12 +290,6 @@ jobs:
         terraform plan \
           -var-file="environments/prod.tfvars" \
           -out=prod.tfplan
-      env:
-        AWS_ENDPOINT_URL: http://localhost:4566
-        TF_VAR_database_password: ${{ secrets.PROD_DB_PASSWORD || 'prod-secure-password' }}
-        TF_VAR_docker_username: ${{ vars.DOCKERHUB_USERNAME }}
-        TF_VAR_docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
-      
     - name: Mostrar plan
       run: terraform show -no-color prod.tfplan
       
