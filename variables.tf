@@ -19,9 +19,9 @@ variable "images" {
   description = "Mapa con los nombres de las imágenes Docker a utilizar."
   type        = map(string)
   default = {
-    vote   = "rodvelinc/vote",
-    worker = "rodvelinc/worker",
-    result = "rodvelinc/result",
+    vote   = "rodvelinc/vote:latest",
+    worker = "rodvelinc/worker:latest",
+    result = "rodvelinc/result:latest",
     db     = "postgres:15",
     cache  = "redis:7",
     nginx  = "nginx:alpine"
