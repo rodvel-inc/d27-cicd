@@ -3,8 +3,7 @@ terraform {
     bucket  = "terraform-state-roxs"
     key     = "roxs-voting-app/terraform.tfstate"
     region  = "us-east-1"
-    profile = "localstack"
-
+    
     endpoints = {
       s3 = "http://localhost:4566"
     }
