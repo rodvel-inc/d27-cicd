@@ -18,7 +18,7 @@ on:
         type: string
 
 env:
-  TF_VERSION: 1.6.0
+  TF_VERSION: 1.12.2
   AWS_ACCESS_KEY_ID: test
   AWS_SECRET_ACCESS_KEY: test
   AWS_DEFAULT_REGION: us-east-1
@@ -72,7 +72,7 @@ jobs:
       run: |
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         unzip awscliv2.zip
-        sudo ./aws/install
+        sudo ./aws/install --update
         
     - name: Configurar LocalStack y S3 Backend
       run: |
@@ -82,7 +82,6 @@ jobs:
     - name: Terraform Init con S3 Backend
       run: |
         terraform init \
-          -backend-config="endpoint=http://localhost:4566" \
           -backend-config="access_key=test" \
           -backend-config="secret_key=test"
       env:

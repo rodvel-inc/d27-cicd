@@ -1,0 +1,26 @@
+# Archivos de estado de Terraform
+# ¡NUNCA versionar! Contienen secretos.
+*.tfstate
+*.tfstate.*
+
+# Directorio de trabajo de Terraform (plugins, módulos)
+# Se regenera con 'terraform init'
+.terraform/
+
+# Archivos de logs de errores de Terraform
+crash.log
+crash.*.log
+
+# Archivos de plan de Terraform
+# Pueden contener información sensible
+*.tfplan
+
+# Archivos de anulación (override)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Archivos de configuración de la CLI de Terraform
+.terraformrc
+terraform.rc

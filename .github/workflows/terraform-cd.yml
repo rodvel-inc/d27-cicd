@@ -31,7 +31,7 @@ on:
         - destroy
 
 env:
-  TF_VERSION: 1.6.0
+  TF_VERSION: 1.12.2
   AWS_ACCESS_KEY_ID: test
   AWS_SECRET_ACCESS_KEY: test
   AWS_DEFAULT_REGION: us-east-1
@@ -84,7 +84,7 @@ jobs:
       run: |
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         unzip awscliv2.zip
-        sudo ./aws/install
+        sudo ./aws/install --update
         
     - name: Configurar LocalStack y S3 Backend
       run: |
@@ -94,7 +94,6 @@ jobs:
     - name: Terraform Init con S3 Backend
       run: |
         terraform init \
-          -backend-config="endpoint=http://localhost:4566" \
           -backend-config="access_key=test" \
           -backend-config="secret_key=test"
       env:
@@ -113,6 +112,8 @@ jobs:
       env:
         AWS_ENDPOINT_URL: http://localhost:4566
         TF_VAR_database_password: ${{ secrets.DEV_DB_PASSWORD || 'dev-default-password' }}
+        TF_VAR_docker_username: ${{ vars.DOCKERHUB_USERNAME }}
+        TF_VAR_docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
       
     - name: Verificar despliegue en LocalStack
       run: |
@@ -173,7 +174,7 @@ jobs:
       run: |
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         unzip awscliv2.zip
-        sudo ./aws/install
+        sudo ./aws/install --update
         
     - name: Configurar LocalStack y S3 Backend
       run: |
@@ -183,7 +184,6 @@ jobs:
     - name: Terraform Init con S3 Backend
       run: |
         terraform init \
-          -backend-config="endpoint=http://localhost:4566" \
           -backend-config="access_key=test" \
           -backend-config="secret_key=test"
       env:
@@ -202,6 +202,8 @@ jobs:
       env:
         AWS_ENDPOINT_URL: http://localhost:4566
         TF_VAR_database_password: ${{ secrets.STAGING_DB_PASSWORD || 'staging-default-password' }}
+        TF_VAR_docker_username: ${{ vars.DOCKERHUB_USERNAME }}
+        TF_VAR_docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
       
     - name: Verificar aplicación en staging
       run: |
@@ -257,7 +259,7 @@ jobs:
       run: |
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         unzip awscliv2.zip
-        sudo ./aws/install
+        sudo ./aws/install --update
         
     - name: Configurar LocalStack y S3 Backend
       run: |
@@ -267,7 +269,6 @@ jobs:
     - name: Terraform Init con S3 Backend
       run: |
         terraform init \
-          -backend-config="endpoint=http://localhost:4566" \
           -backend-config="access_key=test" \
           -backend-config="secret_key=test"
       env:
@@ -286,6 +287,8 @@ jobs:
       env:
         AWS_ENDPOINT_URL: http://localhost:4566
         TF_VAR_database_password: ${{ secrets.PROD_DB_PASSWORD || 'prod-secure-password' }}
+        TF_VAR_docker_username: ${{ vars.DOCKERHUB_USERNAME }}
+        TF_VAR_docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
       
     - name: Mostrar plan
       run: terraform show -no-color prod.tfplan
