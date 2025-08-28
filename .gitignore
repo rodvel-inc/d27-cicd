@@ -15,11 +15,6 @@ crash.*.log
 # Pueden contener información sensible
 *.tfplan
 
-# Archivos de variables
-# Usualmente contienen secretos específicos del entorno
-*.tfvars
-*.tfvars.json
-
 # Archivos de anulación (override)
 override.tf
 override.tf.json
