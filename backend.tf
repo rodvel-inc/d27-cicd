@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = "terraform-state-roxs"
-    key    = "terraform.tfstate"
-    region = "us-east-1"
+    bucket               = "terraform-state-roxs"
+    key                  = "terraform.tfstate"
+    region               = "us-east-1"
     workspace_key_prefix = "workspaces"
 
     endpoints = {
