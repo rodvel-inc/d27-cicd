@@ -1,8 +1,9 @@
 terraform {
   backend "s3" {
     bucket = "terraform-state-roxs"
-    key    = "roxs-voting-app/terraform.tfstate"
+    key    = "terraform.tfstate"
     region = "us-east-1"
+    workspace_key_prefix = "workspaces"
 
     endpoints = {
       s3 = "http://localhost:4566"
